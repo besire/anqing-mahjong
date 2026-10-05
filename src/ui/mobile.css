@@ -4,6 +4,16 @@ html, body { overscroll-behavior: none; }
 .my-hand { touch-action: none; }
 .modal-body, .hp-body, .result, .responsive-page { overscroll-behavior: contain; }
 
+/* 花牌会自动补掉，明确显示自己的补花，并可点击计数查看明细。 */
+.plate-flowers { border: 1px solid #f6d26b55; border-radius: 6px; padding: 0 4px; background: #ffffff0b; color: inherit; font-size: inherit; line-height: inherit; cursor: pointer; white-space: nowrap; }
+.flower-notice { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 20; max-width: calc(100vw - 24px); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px; padding: 8px 14px; border: 1px solid #ffd76aaa; border-radius: 12px; background: #101d2cf5; color: var(--text); box-shadow: 0 8px 24px #0006; font-size: 15px; pointer-events: none; animation: flowerNotice 3.8s ease forwards; }
+.flower-notice b { color: var(--gold); white-space: nowrap; }
+.flower-notice > span:last-child { font-size: 12px; color: #bfccd9; }
+.flower-detail-tiles { display: flex; flex-wrap: wrap; gap: 12px; }
+.flower-detail-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.flower-detail-text { font-size: 15px; line-height: 1.8; color: var(--text); }
+@keyframes flowerNotice { 0% { opacity: 0; } 7%, 88% { opacity: 1; } 100% { opacity: 0; } }
+
 /* 手机横屏牌桌：1560×720，手牌约为原来的两倍宽。 */
 .table-mobile .t-hand { --w: 92px; --h: 126px; --d: 9px; --r: 9px; }
 .table-mobile .t-meld { --w: 58px; --h: 81px; --d: 7px; --r: 6px; }

@@ -54,6 +54,8 @@ export interface Effect {
   seat: Seat;
   text: string;
   variant: 'call' | 'win' | 'flower';
+  /** 自己的补花通知展示实体花牌，不让自动补牌把反馈吞掉。 */
+  tiles?: TileId[];
 }
 
 const DEFAULT_SETTINGS: Settings = {
@@ -203,9 +205,9 @@ export const useGame = create<Store>((set, get) => {
           if (e.seat === HUMAN) sfx.draw();
           break;
         case 'flower':
-          // 起手补花不放特效和音效
+          // 自己的花牌集中显示在清晰的通知里；电脑保留简短桌面特效。
           if (game.s.turnCount > 0) {
-            effects.push({ id: ++effectSeq, seat: e.seat, text: '补花', variant: 'flower' });
+            if (e.seat !== HUMAN) effects.push({ id: ++effectSeq, seat: e.seat, text: '补花', variant: 'flower' });
             sfx.flower();
           }
           break;
@@ -226,7 +228,22 @@ export const useGame = create<Store>((set, get) => {
           break;
       }
     }
-    if (effects.length) set((st) => ({ effects: [...st.effects, ...effects].slice(-6) }));
+    const myFlowers = fresh.flatMap((e) => e.type === 'flower' && e.seat === HUMAN ? [e.tile] : []);
+    if (myFlowers.length) {
+      effects.push({
+        id: ++effectSeq,
+        seat: HUMAN,
+        variant: 'flower',
+        text: `${fresh.some((e) => e.type === 'deal') ? '起手补花' : '摸到花牌'} · +${myFlowers.length} 花`,
+        tiles: myFlowers,
+      });
+    }
+    if (effects.length) set((st) => ({
+      effects: [
+        ...st.effects.filter((e) => !myFlowers.length || e.variant !== 'flower' || e.seat !== HUMAN),
+        ...effects,
+      ].slice(-6),
+    }));
   };
 
   const refreshHint = () => {

@@ -150,6 +150,22 @@ test('a complete round supports calls, settlement, and replay on mobile and desk
   await expect(page.locator('.cb-round')).toContainText('第 2 局');
 });
 
+test('my flowers are announced and remain inspectable with hints disabled', async ({ page }) => {
+  await start(page);
+  const button = page.locator('.plate-0 .plate-flowers');
+  const count = Number((await button.textContent())!.match(/\d+/)![0]);
+  expect(count).toBeGreaterThan(0);
+  await expect(page.locator('.flower-notice')).toContainText('起手补花');
+  await expect(page.locator('.flower-notice .tile')).toHaveCount(count);
+  await page.locator('.hint-toggle').click();
+  await button.click();
+  await expect(page.locator('.modal-head')).toContainText(`我的花牌 · ${count} 张`);
+  await expect(page.locator('.flower-detail-tiles .tile')).toHaveCount(count);
+  await expect(page.locator('.flower-detail-text')).toContainText(`加 ${count} 花`);
+  await page.locator('.modal .hp-close').click();
+  await expect(button).toContainText(String(count));
+});
+
 test('manifest and home screen icons are available', async ({ page, request }) => {
   await page.goto('./');
   const manifestUrl = await page.locator('link[rel="manifest"]').evaluate(el => (el as HTMLLinkElement).href);
