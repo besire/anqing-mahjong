@@ -1,0 +1,215 @@
+/* Responsive pages and compact touch table. The table alone scales; reading UI uses real pixels. */
+html, body { overscroll-behavior: none; }
+.tile, .tile img { -webkit-touch-callout: none; }
+.my-hand { touch-action: none; }
+.modal-body, .hp-body, .result, .responsive-page { overscroll-behavior: contain; }
+
+/* 手机横屏牌桌：1560×720，手牌约为原来的两倍宽。 */
+.table-mobile .t-hand { --w: 92px; --h: 126px; --d: 9px; --r: 9px; }
+.table-mobile .t-meld { --w: 58px; --h: 81px; --d: 7px; --r: 6px; }
+.table-mobile .t-river { --w: 38px; --h: 53px; --d: 5px; }
+.table-mobile .t-opp { --w: 34px; --h: 47px; --d: 6px; }
+.table-mobile .center-box { border-radius: 20px; }
+.table-mobile .cb-core { inset: 44px; border-radius: 12px; }
+.table-mobile .cb-round { font-size: 16px; letter-spacing: 0; }
+.table-mobile .cb-wall b { font-size: 39px; }
+.table-mobile .cb-wall span { font-size: 18px; }
+.table-mobile .cb-streak { font-size: 15px; }
+.table-mobile .cb-label { bottom: 6px; gap: 6px; }
+.table-mobile .cb-wind { width: 30px; height: 30px; font-size: 23px; }
+.table-mobile .cb-score { min-width: 34px; font-size: 24px; }
+.table-mobile .my-row { bottom: 10px; gap: 20px; }
+.table-mobile .my-hand { gap: 2px; }
+.table-mobile .my-melds { gap: 10px; }
+.table-mobile .my-hand .tile.is-selected { transform: translateY(-26px); }
+.table-mobile .tile-badge { top: -32px; min-width: 34px; font-size: 25px; line-height: 28px; padding: 1px 7px; border-radius: 14px; }
+.table-mobile .plate-main { gap: 8px; padding: 5px 12px 5px 5px; }
+.table-mobile .avatar { width: 54px; height: 54px; font-size: 30px; }
+.table-mobile .plate-name { font-size: 25px; }
+.table-mobile .plate-score { font-size: 25px; }
+.table-mobile .plate-sub { font-size: 22px; gap: 8px; }
+.table-mobile .lv { font-size: 17px; padding: 1px 5px; }
+.table-mobile .dealer-badge { width: 26px; height: 26px; font-size: 18px; }
+.table-mobile .plate-flower-tiles { display: none; }
+.table-mobile .plate-0 { left: 18px; top: 494px; }
+.table-mobile .plate-1 { top: 14px; right: 20px; }
+.table-mobile .plate-2 { left: 1040px; top: 14px; }
+.table-mobile .plate-3 { left: 18px; top: 322px; }
+.table-mobile .top-bar { left: 16px; top: 14px; flex-direction: column; gap: 12px; }
+.table-mobile .tb-btn { height: 88px; padding: 0 16px; border-radius: 30px; font-size: 28px; }
+.table-mobile .hint-toggle .dot { width: 14px; height: 14px; }
+.table-mobile .action-bar { right: 20px; bottom: 174px; gap: 14px; align-items: stretch; flex-direction: column; max-height: 470px; overflow-y: auto; padding: 18px 12px 14px; scrollbar-width: none; }
+.table-mobile .act-btn { min-width: 160px; min-height: 86px; height: auto; padding: 6px 20px; font-size: 40px; flex: none; }
+.table-mobile .act-btn .t-mini { --w: 27px; --h: 38px; --d: 3px; }
+.table-mobile .act-rec { font-size: 22px; line-height: 27px; top: -16px; }
+.table-mobile .fx-seat-0 { left: 780px; top: 482px; }
+.table-mobile .fx-seat-1 { left: 1150px; top: 270px; }
+.table-mobile .fx-seat-2 { left: 780px; top: 125px; }
+.table-mobile .fx-seat-3 { left: 410px; top: 270px; }
+.table-mobile .fx-text { font-size: 110px; }
+.table-mobile .fx-flower .fx-text { font-size: 44px; }
+.table-mobile .touch-guide { position: absolute; left: 326px; top: 466px; width: 350px; font-size: 24px; color: #d1eee4; pointer-events: none; }
+
+/* 简要提示条，完整解析不占牌桌宽度。 */
+.hint-strip { position: absolute; left: 280px; top: 722px; width: 520px; min-height: 46px; z-index: 9; border: 1px solid #f6d26b70; border-radius: 12px; background: #0c1829e6; color: #e6edf7; display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 16px; cursor: pointer; text-align: left; }
+.hs-body { flex: 1; min-width: 0; }
+.hs-more { flex: none; color: var(--gold); font-size: 13px; }
+.hs-good { border-color: #ffd54aaa; }
+.hs-bad { border-color: #ff6b6b; }
+.hs-warn { border-color: #ffb459; }
+.table-mobile .hint-strip { left: 326px; top: 439px; width: 350px; min-height: 86px; padding: 8px 14px; font-size: 26px; border-radius: 16px; }
+.table-mobile .hint-strip .hs-more { font-size: 22px; }
+.table-mobile .hint-strip .t-mini { --w: 28px; --h: 39px; --d: 3px; }
+.drawer-mask { position: fixed; inset: 0; z-index: 25; display: flex; justify-content: flex-end; background: #04081080; }
+.drawer { width: min(390px, 94vw); height: 100%; box-shadow: -12px 0 50px #0007; animation: drawerIn .2s ease-out; }
+.drawer .hint-panel { width: 100%; height: 100%; }
+.drawer .hp-head { flex: none; }
+.drawer .hp-close, .modal .hp-close { width: 40px; height: 40px; flex: none; }
+@keyframes drawerIn { from { transform: translateX(100%); } to { transform: none; } }
+
+/* 阅读和设置界面不跟随画布缩放。 */
+.modal-head { flex: none; }
+.modal-body { min-height: 0; }
+.set-label { flex: none; }
+.set-ctrl { min-width: 0; }
+.menu-list { min-width: 0; }
+.res-actions { position: sticky; bottom: -20px; padding: 12px 0 4px; background: #0d1526f5; }
+.result .res-title { flex-wrap: wrap; gap: 4px 14px; }
+.result .res-tiles { flex-wrap: wrap; }
+.rotate-overlay { position: fixed; inset: 0; z-index: 45; background: radial-gradient(circle at 50% 35%, #1c3550, #090f1d 75%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 24px; text-align: center; }
+.ro-phone { width: 68px; height: 110px; border: 4px solid var(--gold); border-radius: 14px; padding: 9px 5px; animation: rotatePhone 2.8s ease-in-out infinite; }
+.ro-screen { width: 100%; height: 100%; border-radius: 6px; background: linear-gradient(145deg, #2f9f84, #143d38); }
+.ro-text { font-size: 25px; font-weight: 800; color: var(--gold); }
+.ro-sub { max-width: 320px; color: var(--muted); line-height: 1.7; font-size: 15px; }
+.ro-actions { display: flex; flex-direction: column; gap: 12px; }
+@keyframes rotatePhone { 0%, 20% { transform: rotate(0); } 55%, 90% { transform: rotate(90deg); } }
+
+/* 首页：正常页面，横竖屏均可读、可滚动。 */
+.responsive-page { position: fixed; inset: 0; overflow-y: auto; overflow-x: hidden; background: var(--felt); }
+.home.responsive-page { width: 100%; height: 100%; display: grid; grid-template-columns: minmax(0, 640px); grid-template-rows: auto auto auto auto; justify-content: center; align-content: safe center; gap: 24px; padding: 30px 24px; }
+.home::before { position: fixed; }
+.home-title { margin-top: 0; }
+.home-title h1 { font-size: clamp(48px, 8vw, 112px); letter-spacing: clamp(4px, 1vw, 16px); }
+.home-title p { font-size: clamp(14px, 2vw, 22px); letter-spacing: clamp(2px, .5vw, 8px); }
+.home-card { width: 100%; margin: 0; padding: 24px; gap: 16px; }
+.home-stats { margin: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.home-foot { position: relative; bottom: auto; color: #d6f5eaad; text-align: center; font-size: 12px; line-height: 1.7; }
+.install-tip { display: block; margin-top: 6px; color: var(--gold); }
+.home-decor { position: absolute; inset: 0; pointer-events: none; }
+.home-decor .decor-0 { left: 5%; top: 10%; }
+.home-decor .decor-1 { left: 10%; top: 35%; }
+.home-decor .decor-2 { left: 5%; top: 60%; }
+.home-decor .decor-3 { left: 10%; top: 80%; }
+.home-decor .decor-4 { right: 5%; top: 10%; }
+.home-decor .decor-5 { right: 10%; top: 35%; }
+.home-decor .decor-6 { right: 5%; top: 60%; }
+.home-decor .decor-7 { right: 10%; top: 80%; }
+
+/* 何切练习：竖屏两行七张，宽屏一行十四张。解析直接滚动页面。 */
+.drill { width: min(1200px, 100%); min-height: 100%; height: auto; margin: auto; padding: 16px 24px 20px; background: none; }
+.drill-top { flex-wrap: wrap; }
+.drill-stats { white-space: nowrap; }
+.drill-q { text-align: center; }
+.drill-q small { display: inline-block; }
+.drill-hand { display: grid; grid-template-columns: repeat(14, auto); gap: 3px; min-height: 0; padding-top: 14px; }
+.drill-hand .t-drill { --w: clamp(27px, calc((100vw - 90px) / 14), 66px); --h: calc(var(--w) * 1.4); --d: 6px; --r: 6px; }
+.drill-analysis { flex: none; align-items: start; }
+.da-left, .da-right { overflow: visible; }
+.drill-actions { position: sticky; bottom: 0; z-index: 10; padding: 12px; border-radius: 15px; background: #0c1829e6; margin-top: 24px; }
+.drill-actions .btn { min-width: 160px; }
+.drill-grade { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.drill-grade small { margin-left: 0; }
+
+@media (max-width: 1100px) {
+  .home-decor { display: none; }
+}
+@media (max-width: 600px) {
+  .home.responsive-page { padding: 28px 16px; gap: 22px; }
+  .home-card { padding: 18px 14px; }
+  .home-row { gap: 6px; }
+  .home-label { font-size: 14px; }
+  .home-card .seg.big button { padding: 7px 10px; font-size: 14px; }
+  .home-btns { gap: 6px; }
+  .home-btns .btn { padding: 10px 4px; font-size: 14px; }
+  .home-stats { gap: 6px; }
+  .home-stats b { font-size: 22px; }
+  .home-foot { font-size: 11px; }
+  .set-cols { grid-template-columns: 1fr; gap: 12px; }
+  .modal-mask { padding: 8px; }
+  .modal, .result { max-height: calc(100dvh - 16px); }
+  .modal-body { padding: 8px 12px 16px; }
+  .set-row { gap: 6px; flex-wrap: wrap; }
+  .set-label small { font-size: 12px; }
+  .set-label { font-size: 14px; }
+  .set-ctrl select { max-width: 100%; width: 100%; }
+  .result { padding: 14px; }
+  .res-title { font-size: 30px; letter-spacing: 2px; }
+  .res-who { font-size: 16px; }
+  .res-items { grid-template-columns: repeat(2, 1fr); }
+  .res-item { font-size: 14px; }
+  .res-total b { font-size: 34px; }
+  .res-total small { display: block; }
+  .res-deltas { gap: 4px; }
+  .rd { padding: 6px 2px; }
+  .rd-name { font-size: 14px; }
+  .rd-delta { font-size: 22px; }
+  .res-actions { bottom: -14px; flex-wrap: wrap; gap: 6px; }
+  .res-actions .btn { flex: 1 0 40%; padding: 10px 8px; font-size: 14px; }
+  .result .t-result { --w: 30px; --h: 42px; --d: 4px; }
+  .result .t-small { --w: 24px; --h: 34px; }
+  .drill { padding: 12px; }
+  .drill-title { font-size: 21px; }
+  .drill-top { gap: 8px; }
+  .drill-stats { margin: 0; width: 100%; font-size: 12px; text-align: center; }
+  .drill-q { margin-top: 22px; font-size: 20px; }
+  .drill-q small { font-size: 13px; line-height: 1.6; }
+  .drill-hand { grid-template-columns: repeat(7, auto); gap: 20px 3px; margin-top: 16px; }
+  .drill-hand .t-drill { --w: calc((100vw - 56px) / 7); --h: calc(var(--w) * 1.4); --d: 5px; }
+  .drill-analysis { grid-template-columns: 1fr; gap: 12px; }
+  .da-left, .da-right { padding: 6px 10px 14px; }
+  .drill-grade { font-size: 25px; }
+  .drill-grade small { font-size: 14px; }
+  .ro-actions .btn { min-height: 44px; }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  .home.responsive-page { grid-template-columns: minmax(180px, .8fr) minmax(320px, 1.2fr); grid-template-rows: auto auto auto; align-content: safe center; gap: 14px 16px; padding: 14px 14px; }
+  .home-title { grid-column: 1; grid-row: 1; align-self: end; }
+  .home-title h1 { font-size: clamp(40px, 6vw, 76px); letter-spacing: 3px; }
+  .home-title p { font-size: 13px; letter-spacing: 1px; }
+  .home-card { grid-column: 2; grid-row: 1 / 3; padding: 16px; gap: 12px; }
+  .home-card .seg.big button { padding: 7px 10px; font-size: 14px; }
+  .home-stats { grid-column: 1; grid-row: 2; align-self: start; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .home-stats div { padding: 5px; }
+  .home-stats b { font-size: 21px; }
+  .home-foot { grid-column: 1 / -1; font-size: 11px; }
+  .home-btns { gap: 6px; }
+  .home-btns .btn { padding: 8px 4px; font-size: 13px; }
+  .home-label { font-size: 14px; }
+  .btn.huge { font-size: 21px; padding: 12px; }
+  .modal-mask { padding: 8px; }
+  .modal, .result { max-height: calc(100dvh - 16px); }
+  .set-cols { grid-template-columns: 1fr; gap: 12px; }
+  .modal.wide { width: min(540px, 100%); }
+  .result { padding: 14px 18px; }
+  .res-title { font-size: 32px; letter-spacing: 2px; }
+  .result .t-result { --w: 32px; --h: 45px; --d: 4px; }
+  .res-actions { bottom: -14px; }
+  .drill-top { gap: 10px; }
+  .drill-title { font-size: 22px; }
+  .drill-stats { margin-left: 0; font-size: 12px; }
+  .drill-q { margin-top: 14px; font-size: 20px; }
+  .drill-hand { margin-top: 10px; }
+}
+@media (hover: none) {
+  .modal .seg button, .home-card .seg button, .drill-top .seg button { min-height: 40px; }
+  .modal .switch { width: 52px; height: 32px; }
+  .modal .switch::after { width: 26px; height: 26px; }
+  .modal .switch.on::after { transform: translateX(20px); }
+  .modal .set-row { min-height: 52px; }
+  .modal .btn, .res-actions .btn { min-height: 44px; }
+  .drill-top .tb-btn { min-height: 40px; }
+  .hp-body .clickable, .hp-body .link-btn { min-height: 40px; align-items: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ro-phone, .mk-best::after, .cb-turn.on, .act-btn.recommended { animation: none; }
+}

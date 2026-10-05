@@ -1,0 +1,7 @@
+Tile face artwork (except bai.svg) is adapted from:
+https://github.com/FluffyStuff/riichi-mahjong-tiles
+
+Upstream license: CC0 / public domain.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The SVG files have been optimized and renamed. bai.svg is an original drawing.

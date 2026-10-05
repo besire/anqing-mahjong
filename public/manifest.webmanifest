@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "安庆麻将 · 牌效练习场",
+  "short_name": "安庆麻将",
+  "description": "单人四人房人机对战，何切提示与牌效练习",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#0c1324",
+  "theme_color": "#0c1324",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
